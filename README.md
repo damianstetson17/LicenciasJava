@@ -1,5 +1,5 @@
 # 👥 Sistema de Gestión de Licencias 👥
-Basado en el [Sistema de Licencias hecho en python](https://github.com/damianstetson17/PyLicenciasPersonal) desarollado para un sistema de gestión de licencias para un departamento de personal, en donde se lleva registro y control de licencias de empleados, en el podrás:
+Basado en el [Sistema de Licencias hecho en python](https://github.com/damianstetson17/PyLicenciasPersonal) desarrollado para un sistema de gestión de licencias para un departamento de personal, en donde se lleva registro y control de licencias de empleados, en el podrás:
 
 * Crear y borrar empleados basados en un identificador denominado "número de legajo".
 * Crear y borrar dias correspondientes por año.
