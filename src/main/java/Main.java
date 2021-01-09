@@ -1,6 +1,7 @@
 
 import com.damian.licencias.controller.LicenciaController;
 import com.damian.licencias.model.*;
+import com.damian.licencias.persistencia.Persistencia;
 
 import java.util.Calendar;
 
@@ -12,6 +13,9 @@ import java.util.Calendar;
 public class Main {
 
     public static void main(String[] args) {
+        //conectar BD sqlite
+        Persistencia persistencia = new Persistencia();
+        persistencia.connect();
         //controlador
         LicenciaController controlador = new LicenciaController();
         
