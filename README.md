@@ -33,11 +33,11 @@ Se ha ajustado levemente el diagra de clases del [Sistema de Licencias hecho en 
 
 ## 🚀 ¿Cómo ejecutar? 🚀
 
-Para ejecutar correctamente simplemente compilar el archivo [main.py](https://github.com/damianstetson17/LicenciasJava/blob/main/src/main/java/Main.java).
+Para ejecutar correctamente simplemente compilar el archivo [main.java](https://github.com/damianstetson17/LicenciasJava/blob/main/src/main/java/Main.java).
 Al finalizar el proyecto se incluirá el ejecutable.
 
-### ¿Que me encontraré al compilar el archivo [main.py](https://github.com/damianstetson17/PyLicenciasPersonal/blob/main/src/main.py)?
-Que no te pierda la cantidad de contenido dentro del fichero [main.py](https://github.com/damianstetson17/PyLicenciasPersonal/blob/main/src/main.py), simplemente
+### ¿Que me encontraré al compilar el archivo [main.java](https://github.com/damianstetson17/PyLicenciasPersonal/blob/main/src/main.py)?
+Que no te pierda la cantidad de contenido dentro del fichero [main.java](https://github.com/damianstetson17/PyLicenciasPersonal/blob/main/src/main.py), simplemente
 crea instancias de los objetos del modelo, generación de Licencias, entre otros. Los métodos se encuentran documentados con la finalidad del mísmo. 
 
 ## 🦚 Aclaraciones 🦚
