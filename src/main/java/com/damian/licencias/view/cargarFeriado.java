@@ -13,7 +13,7 @@ public class cargarFeriado extends javax.swing.JFrame {
         initComponents();
         this.setTitle("Cargar Feriado");
         this.setResizable(false);
-        this.setSize(580,440);
+        this.setSize(677,434);
         this.setLocationRelativeTo(null);
         cargarTablaFeriado();
         
@@ -82,11 +82,11 @@ public class cargarFeriado extends javax.swing.JFrame {
                 calendarioMouseClicked(evt);
             }
         });
-        getContentPane().add(calendario, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 250, 180));
+        getContentPane().add(calendario, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 360, 200));
 
         jLabel2.setText("Se creara el feriado con la fecha:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 180, 40));
-        getContentPane().add(labelFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 290, 100, 30));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 250, 40));
+        getContentPane().add(labelFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 310, 100, 30));
 
         tablaFeriados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -98,10 +98,10 @@ public class cargarFeriado extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tablaFeriados);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 80, 220, 210));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 80, 220, 210));
 
         jLabel3.setText("Feriados existentes:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 40, 170, 30));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 40, 170, 30));
 
         BotonCargar.setText("Cargar Feriado");
         BotonCargar.addActionListener(new java.awt.event.ActionListener() {
@@ -109,7 +109,7 @@ public class cargarFeriado extends javax.swing.JFrame {
                 BotonCargarActionPerformed(evt);
             }
         });
-        getContentPane().add(BotonCargar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 360, 130, 40));
+        getContentPane().add(BotonCargar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 380, 130, 40));
 
         botonCancelar.setText("Cancelar");
         botonCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -117,7 +117,7 @@ public class cargarFeriado extends javax.swing.JFrame {
                 botonCancelarActionPerformed(evt);
             }
         });
-        getContentPane().add(botonCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 360, 120, 40));
+        getContentPane().add(botonCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 380, 120, 40));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

@@ -46,15 +46,15 @@ public class cargarLicenciaAuto extends javax.swing.JFrame {
                 jCalendar1MouseClicked(evt);
             }
         });
-        getContentPane().add(jCalendar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, -1, -1));
+        getContentPane().add(jCalendar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 370, 200));
 
         jLabel2.setText("Fecha Inicio:");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 80, 30));
         getContentPane().add(textNroLegajo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 120, 30));
 
         jLabel3.setText("Fecha Fin:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 70, 30));
-        getContentPane().add(labelFechaFin, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 330, 90, 30));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 390, 70, 30));
+        getContentPane().add(labelFechaFin, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 390, 100, 30));
 
         botonCargarLicencia.setText("Cargar Licencia");
         botonCargarLicencia.addActionListener(new java.awt.event.ActionListener() {
@@ -62,7 +62,7 @@ public class cargarLicenciaAuto extends javax.swing.JFrame {
                 botonCargarLicenciaActionPerformed(evt);
             }
         });
-        getContentPane().add(botonCargarLicencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 420, 110, 40));
+        getContentPane().add(botonCargarLicencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 440, 130, 40));
 
         botonSalir.setText("Salir");
         botonSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -70,11 +70,11 @@ public class cargarLicenciaAuto extends javax.swing.JFrame {
                 botonSalirActionPerformed(evt);
             }
         });
-        getContentPane().add(botonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 420, 100, 40));
+        getContentPane().add(botonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 440, 100, 40));
 
         jLabel4.setText("Cantidad dias solicitados:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 150, 30));
-        getContentPane().add(textCantDiasPedidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 290, 100, 30));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, 150, 30));
+        getContentPane().add(textCantDiasPedidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 340, 100, 30));
 
         jLabel5.setText("Cargar nueva licencia:");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 14, 230, 30));

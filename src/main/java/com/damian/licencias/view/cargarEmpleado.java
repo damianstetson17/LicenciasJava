@@ -63,6 +63,7 @@ public class cargarEmpleado extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaEmpleado = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
@@ -74,7 +75,7 @@ public class cargarEmpleado extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         textNombre = new javax.swing.JTextField();
         textNroLegajo = new javax.swing.JTextField();
-        elegirAntiguedad = new com.toedter.calendar.JDateChooser();
+        jDateChooserAntiguedadEmple = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -123,13 +124,7 @@ public class cargarEmpleado extends javax.swing.JFrame {
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 90, 30));
         getContentPane().add(textNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 130, 30));
         getContentPane().add(textNroLegajo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 130, 30));
-
-        elegirAntiguedad.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                elegirAntiguedadMouseClicked(evt);
-            }
-        });
-        getContentPane().add(elegirAntiguedad, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 130, 30));
+        getContentPane().add(jDateChooserAntiguedadEmple, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 130, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -152,7 +147,8 @@ public class cargarEmpleado extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonCancelar;
     private javax.swing.JButton botonCargar;
-    private com.toedter.calendar.JDateChooser elegirAntiguedad;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser jDateChooserAntiguedadEmple;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
