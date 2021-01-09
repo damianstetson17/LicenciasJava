@@ -1,7 +1,6 @@
 package com.damian.licencias.model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
@@ -12,7 +11,7 @@ import java.util.List;
  */
 public class Empleado {
     private int nroLegajo;
-    private String nombreYApellido;
+    private String nombreApellido;
     private Calendar antiguedad;
     private boolean estado;
     private List<DiasCorrespondiente> diasCorrespondientes = new ArrayList<>();
@@ -27,7 +26,7 @@ public class Empleado {
      */
     public Empleado(int nroLegajo, String nombreYApellido, Calendar antiguedad, boolean estado) {
         this.nroLegajo = nroLegajo;
-        this.nombreYApellido = nombreYApellido;
+        this.nombreApellido = nombreYApellido;
         this.antiguedad = antiguedad;
         this.estado = estado;
     }
@@ -42,12 +41,12 @@ public class Empleado {
         this.nroLegajo = nroLegajo;
     }
 
-    public String getNombreYApellido() {
-        return nombreYApellido;
+    public String getNombreApellido() {
+        return nombreApellido;
     }
 
-    public void setNombreYApellido(String nombreYApellido) {
-        this.nombreYApellido = nombreYApellido;
+    public void setNombreApellido(String nombreApellido) {
+        this.nombreApellido = nombreApellido;
     }
 
     public Calendar getAntiguedad() {
@@ -86,6 +85,31 @@ public class Empleado {
     public void addDiasCorrespondiente(DiasCorrespondiente diasNew){
         this.diasCorrespondientes.add(diasNew);
         Collections.sort(this.diasCorrespondientes);
+    }
+    
+    //search methods
+    
+    public DiasCorrespondiente buscarDiasCorrespondiente(Calendar fechadiasBuscados){
+        DiasCorrespondiente diasBuscados = null;
+        for(DiasCorrespondiente d : this.diasCorrespondientes){
+            //si los anios coinciden
+            if(d.getFechaAnio().get(Calendar.YEAR) == fechadiasBuscados.get(Calendar.YEAR)){
+                diasBuscados = d;
+                break;
+            }
+        }
+        return diasBuscados;
+    }
+    
+    public Licencia buscarLicencia (Calendar fechaLicBuscada){
+        Licencia licBuscada = null;
+        for(Licencia l : this.licencias){
+            if(l.getFechaInico().get(Calendar.YEAR) == fechaLicBuscada.get(Calendar.YEAR)){
+                licBuscada = l;
+                break;
+            }
+        }
+        return licBuscada;
     }
     
 }
