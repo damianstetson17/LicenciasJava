@@ -10,7 +10,7 @@ Basado en el [Sistema de Licencias hecho en python](https://github.com/damianste
 Se ha ajustado levemente el diagra de clases del [Sistema de Licencias hecho en python](https://github.com/damianstetson17/PyLicenciasPersonal) para ser más consistente y completo.
 Se decidió realizar el proyecto en base al paradigmas orientado a objetos, por lo tanto, se adjunta el diagrama de clases asociado a la resolución del escenario, esto también afectó la manera de organización de los módulos y clases del proyecto [(Véase carpeta raíz.)](https://github.com/damianstetson17/PyLicenciasPersonal/tree/main/src).
 
-![diagrama_de_clases](https://github.com/damianstetson17/PyLicenciasPersonal/blob/main/img/classes.png.png)
+![diagrama_de_clases](https://github.com/damianstetson17/LicenciasJava/blob/main/img/class_diagram_java.png)
 
 ## ⚠️ Estado del proyecto ⚠️
 
