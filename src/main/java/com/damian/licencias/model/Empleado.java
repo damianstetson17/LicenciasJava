@@ -9,7 +9,7 @@ import java.util.List;
  *
  * @author Damian
  */
-public class Empleado {
+public class Empleado implements Comparable<Empleado>{
     private int nroLegajo;
     private String nombreApellido;
     private Calendar antiguedad;
@@ -87,6 +87,11 @@ public class Empleado {
         Collections.sort(this.diasCorrespondientes);
     }
     
+    public void addLicencia(Licencia licNew){
+        this.licencias.add(licNew);
+        Collections.sort(this.licencias);
+    }
+    
     //search methods
     
     public DiasCorrespondiente buscarDiasCorrespondiente(Calendar fechadiasBuscados){
@@ -104,7 +109,7 @@ public class Empleado {
     public Licencia buscarLicencia (Calendar fechaLicBuscada){
         Licencia licBuscada = null;
         for(Licencia l : this.licencias){
-            if(l.getFechaInico().get(Calendar.YEAR) == fechaLicBuscada.get(Calendar.YEAR)){
+            if(l.getFechaInicio().get(Calendar.YEAR) == fechaLicBuscada.get(Calendar.YEAR)){
                 licBuscada = l;
                 break;
             }
@@ -112,4 +117,10 @@ public class Empleado {
         return licBuscada;
     }
     
+    //compareTo de antiguedad mas vieja a mas nueva
+
+    @Override
+    public int compareTo(Empleado e) {
+         return this.getAntiguedad().getTime().compareTo(e.getAntiguedad().getTime()); 
+    }
 }

@@ -9,9 +9,9 @@ import java.util.List;
  *
  * @author Damian
  */
-public class Licencia {
-    private Calendar fechaInico; 
-    private Calendar fechaFin;
+public class Licencia implements Comparable<Licencia>{
+    private Calendar fechaInico = Calendar.getInstance(); 
+    private Calendar fechaFin = Calendar.getInstance();
     private int  cantDiasPedidos;
     private List<DiasTomados> diasTomados = new ArrayList<>();
 
@@ -25,7 +25,7 @@ public class Licencia {
         this.cantDiasPedidos = cantDiasPedidos;
     }
 
-    public Calendar getFechaInico() {
+    public Calendar getFechaInicio() {
         return fechaInico;
     }
 
@@ -61,5 +61,24 @@ public class Licencia {
     public void addDiasTomados(DiasTomados diasTomadosNew){
         this.diasTomados.add(diasTomadosNew);
         Collections.sort(this.diasTomados);
+    }
+    
+    //search method
+    public DiasTomados buscarDiasTomados(DiasTomados diasTomados){
+        DiasTomados diasTomadosBuscados = null;
+        for(DiasTomados diasT : this.diasTomados){
+            if(diasT.getAnioDiasCorresp().getFechaAnio().get(Calendar.YEAR)
+                    == diasTomados.getAnioDiasCorresp().getFechaAnio().get(Calendar.YEAR)){
+                diasTomadosBuscados = diasT;
+                break;
+            }
+        }
+        return diasTomadosBuscados;
+    }
+    //compareTo de fecha mas vieja a mas nueva
+
+    @Override
+    public int compareTo(Licencia o) {
+         return this.fechaInico.getTime().compareTo(o.getFechaInicio().getTime()); 
     }
 }
