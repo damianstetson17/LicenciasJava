@@ -27,7 +27,7 @@ public class listadoLicencia extends javax.swing.JFrame {
     
     /*
     cargar tabla
-    */
+    
     private void cargarTablaLicenciaEmp() {
 
         List<> diascorresp = controladorEmp.buscarTurnosAtenderEmpleado(emp);
@@ -65,7 +65,7 @@ public class listadoLicencia extends javax.swing.JFrame {
         }
     }
     
-    
+    */
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -136,7 +136,7 @@ public class listadoLicencia extends javax.swing.JFrame {
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
         //cuando se apreta buscar se toma el nrolegajo del textfield y se busca al empleado y llama a cargar tabla de licencias
                 
-        cargarTablaLicenciaEmp();
+     //   cargarTablaLicenciaEmp();
         
         
     }//GEN-LAST:event_botonBuscarActionPerformed

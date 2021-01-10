@@ -1,18 +1,19 @@
 
 package com.damian.licencias.view;
 
+import com.damian.licencias.controller.LicenciaController;
+
 
 public class menuPrincipal extends javax.swing.JFrame {
-
-    public menuPrincipal() {
+    private LicenciaController controlador;
+    public menuPrincipal(LicenciaController control) {
         initComponents();
-        
-         this.setTitle("Menu Principal");
+        this.controlador= control;
+        this.setTitle("Menu Principal");
         this.setResizable(false);
         this.setSize(430,330);
         this.setLocationRelativeTo(null);
        
-        
         this.setVisible(true);
         
     }
@@ -65,12 +66,22 @@ public class menuPrincipal extends javax.swing.JFrame {
         jMenu1.setText("Cargar");
 
         jMenuItem1.setText("Empleado");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem1);
 
         jMenuItem2.setText("Dias Correspondientes");
         jMenu1.add(jMenuItem2);
 
         jMenuItem3.setText("Feriado");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem3);
 
         jMenu6.setText("Licencia");
@@ -123,12 +134,22 @@ public class menuPrincipal extends javax.swing.JFrame {
         jMenu4.setText("Listados");
 
         jMenuItem15.setText("Listado de empleado");
+        jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem15ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem15);
 
         jMenuItem16.setText("Listado de licencias");
         jMenu4.add(jMenuItem16);
 
         jMenuItem17.setText("Listado de feriados");
+        jMenuItem17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem17ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem17);
 
         jMenuBar1.add(jMenu4);
@@ -155,6 +176,26 @@ public class menuPrincipal extends javax.swing.JFrame {
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
         dispose();
     }//GEN-LAST:event_botonSalirActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+       dispose();
+       cargarEmpleado iracargar= new cargarEmpleado(controlador);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        dispose();
+       cargarFeriado cargar= new cargarFeriado(controlador);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
+        dispose();
+        listadoEmpleados iralistado= new listadoEmpleados(controlador);
+    }//GEN-LAST:event_jMenuItem15ActionPerformed
+
+    private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
+        dispose();
+        listadoFeriados iralist= new listadoFeriados(controlador);
+    }//GEN-LAST:event_jMenuItem17ActionPerformed
 
     
 

@@ -1,22 +1,25 @@
 
 package com.damian.licencias.view;
 
+import com.damian.licencias.controller.LicenciaController;
+import com.damian.licencias.model.Empleado;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class listadoEmpleados extends javax.swing.JFrame {
 
-    
-    public listadoEmpleados() {
+    private LicenciaController controlador;
+    public listadoEmpleados(LicenciaController control ) {
         initComponents();
-        
+        this.controlador= control;
         this.setTitle("Listado de Empleados");
         this.setResizable(false);
         this.setSize(588,500);
         this.setLocationRelativeTo(null);
         cargartablaEmpleados();
-        
         
         
         this.setVisible(true);
@@ -27,19 +30,21 @@ public class listadoEmpleados extends javax.swing.JFrame {
     */
     private void cargartablaEmpleados() {
 
-        List<DiasCorrespondiente> diascorresp = controladorEmp.buscarTurnosAtenderEmpleado(emp);
+        List<Empleado> empleados = controlador.getEmpleados();
 
-        String matriz[][] = new String[empleados.size()][1];
+        String matriz[][] = new String[empleados.size()][4];
         
-        if (!diascorresp.isEmpty()) {
+        if (!empleados.isEmpty()) {
             int i = 0;
-            for (DiasCorrespondiente d : diascorresp) {
-                if (d.algo no existe)) {
-                    matriz[i][0] = d.fecha;
-                    matriz[i][1] = d.fecha;
-                    matriz[i][2] = d.fecha;
-                    i++;
-                }
+            for (Empleado e : empleados) {
+                Calendar c1 = e.getAntiguedad();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                matriz[i][0] =String.valueOf(e.getNroLegajo());
+                matriz[i][1] = e.getNombreApellido();
+                matriz[i][2] = sdf.format(c1.getTime());
+                matriz[i][3] = String.valueOf(e.isEstado());
+                 i++;
+                
             }
             tablaEmpleados.setModel(new DefaultTableModel(
                     matriz,
@@ -48,7 +53,7 @@ public class listadoEmpleados extends javax.swing.JFrame {
                     }
             ));
         } else {
-            JOptionPane.showMessageDialog(null, "No posee turnos para atender");
+            JOptionPane.showMessageDialog(null, "No existen empleados cargados");
             tablaEmpleados.setModel(new DefaultTableModel(
                     null,
                     new String[]{
@@ -107,11 +112,12 @@ public class listadoEmpleados extends javax.swing.JFrame {
 
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
         dispose();
-        //llamar ventana anterior
+        menuPrincipal iramenu = new menuPrincipal(controlador);
     }//GEN-LAST:event_botonSalirActionPerformed
 
     private void botonCargarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCargarEmpleadoActionPerformed
-        // llamar a la ventana cargarEmpleado
+        dispose();
+        cargarEmpleado iracargar=new cargarEmpleado(controlador);
     }//GEN-LAST:event_botonCargarEmpleadoActionPerformed
 
     

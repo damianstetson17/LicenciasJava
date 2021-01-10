@@ -24,7 +24,7 @@ public class cargarLicenciaAntigua extends javax.swing.JFrame {
     }
      /*
     cargar tabla
-    */
+    
     private void cargarTablaLicencia() {
 
         List<DiasCorrespondiente> diascorresp = controladorEmp.buscarTurnosAtenderEmpleado(emp);
@@ -64,7 +64,7 @@ public class cargarLicenciaAntigua extends javax.swing.JFrame {
 
      /*
     cargar tabla
-    */
+    
     private void cargartablaDiasCorrespondienteEmpleado() {
 
         List<DiasCorrespondiente> diascorresp = controladorEmp.buscarTurnosAtenderEmpleado(emp);
@@ -97,7 +97,7 @@ public class cargarLicenciaAntigua extends javax.swing.JFrame {
            
         }
     }
-   
+   */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -217,7 +217,7 @@ public class cargarLicenciaAntigua extends javax.swing.JFrame {
 
     private void botonBuscarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarEmpleadoActionPerformed
         // TODO add your handling code here:
-        cargartablaDiasCorrespondienteEmpleado();
+     //   cargartablaDiasCorrespondienteEmpleado();
     }//GEN-LAST:event_botonBuscarEmpleadoActionPerformed
 
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
@@ -238,7 +238,7 @@ public class cargarLicenciaAntigua extends javax.swing.JFrame {
 
     private void botonOcuparDiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonOcuparDiasActionPerformed
         // TODO add your handling code here:
-        cargarTablaLicencia();
+       // cargarTablaLicencia();
          this.setVisible(true);
     }//GEN-LAST:event_botonOcuparDiasActionPerformed
 
