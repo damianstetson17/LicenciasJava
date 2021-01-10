@@ -21,7 +21,7 @@ public class DiasCorrespondiente implements Comparable<DiasCorrespondiente> {
     public DiasCorrespondiente(Calendar FechaAnio, int cantDias, boolean estado){
         this.fechaAnio = FechaAnio;
         this.dias = cantDias;
-        this.estado = estado;   
+        this.setEstado(estado);   
     }
 
     public Calendar getFechaAnio() {
@@ -52,7 +52,12 @@ public class DiasCorrespondiente implements Comparable<DiasCorrespondiente> {
     }
 
     public void setEstado(boolean estado) {
-        this.estado = estado;
+        if(this.dias == 0)
+        {
+            this.estado=false;
+        }else{
+            this.estado=true;
+        }
     }
     
     //compareTo de fecha mas vieja a mas nueva

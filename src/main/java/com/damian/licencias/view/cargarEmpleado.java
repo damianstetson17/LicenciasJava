@@ -168,7 +168,7 @@ public class cargarEmpleado extends javax.swing.JFrame {
                } catch (ParseException ex) {
                    JOptionPane.showMessageDialog(null, "Error al tomar la fecha, error de parse");
                } catch (Exception ex) {
-                   JOptionPane.showMessageDialog(null, "Error no se puede agregar al nuevo empleado");
+                   JOptionPane.showMessageDialog(null, ex.getMessage());
                }
                  
                

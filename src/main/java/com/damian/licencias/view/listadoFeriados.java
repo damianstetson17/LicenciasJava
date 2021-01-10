@@ -25,12 +25,12 @@ public class listadoFeriados extends javax.swing.JFrame {
     }
 
     
-    /*
-    cargar tabla
-    */
+    
+    //cargar tabla
+    
     private void cargarTablaFeriados(int anoFeriado) {
 
-        List<Feriado> feriados = controladorbuscarFeriadoPorAno(anoFeriado);
+        List<Feriado> feriados = controlador.buscarFeriadoPorAnio(anoFeriado);
 
         String matriz[][] = new String[feriados.size()][3];
         
@@ -136,12 +136,10 @@ public class listadoFeriados extends javax.swing.JFrame {
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
         if(!anoFeriado.getText().equals("")){
             int anoabuscar = Integer.parseInt(anoFeriado.getText());
-            Feriado feriadoabuscar = controlador.buscarFeriadoPorAno(anoabuscar);
-            
-            cargarTablaFeriados(feriadoabuscar);
+            cargarTablaFeriados(anoabuscar);
             this.setVisible(true);
         }else{
-            JOptionPane.showMessageDialog(null, "debe ingresar un año a buscar");
+            JOptionPane.showMessageDialog(null, "Debe ingresar un año a buscar");
         }
            
     }//GEN-LAST:event_botonBuscarActionPerformed

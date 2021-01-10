@@ -74,6 +74,11 @@ public class menuPrincipal extends javax.swing.JFrame {
         jMenu1.add(jMenuItem1);
 
         jMenuItem2.setText("Dias Correspondientes");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem2);
 
         jMenuItem3.setText("Feriado");
@@ -174,7 +179,7 @@ public class menuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
-        dispose();
+        System.exit(0);
     }//GEN-LAST:event_botonSalirActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -196,6 +201,11 @@ public class menuPrincipal extends javax.swing.JFrame {
         dispose();
         listadoFeriados iralist= new listadoFeriados(controlador);
     }//GEN-LAST:event_jMenuItem17ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+         dispose();
+         cargarDiasCorrespon irCargarDiasCorresp = new cargarDiasCorrespon(controlador);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     
 

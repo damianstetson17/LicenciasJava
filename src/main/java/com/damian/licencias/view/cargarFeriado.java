@@ -150,7 +150,7 @@ public class cargarFeriado extends javax.swing.JFrame {
     }//GEN-LAST:event_botonCancelarActionPerformed
 
     private void BotonCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonCargarActionPerformed
-        if(calendario.getDate() == null && textDescripcion.getText().equals("")){
+        if(/*(calendario.getDate() == null )&&*/( textDescripcion.getText().equals(""))){
             JOptionPane.showMessageDialog(null, "debe completar todos los campos");
         }else{
             try {
@@ -159,37 +159,29 @@ public class cargarFeriado extends javax.swing.JFrame {
                 String fecha2=f.format(fecha);
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(f.parse(fecha2));
-               if( controlador.buscarFeriado(cal)!= null){
+               /*if( controlador.buscarFeriado(cal)!= null){
                     JOptionPane.showMessageDialog(null, "El feriado ingresado ya existe");
-               }else{
+               }else{*/
                    
                    Feriado feriadoCreado = new Feriado(textDescripcion.getText(),cal);
                    controlador.addFeriado(feriadoCreado);
                    cargarTablaFeriado();
                    this.setVisible(true);
-               }
+               //}
             } catch (ParseException ex) {
                 JOptionPane.showMessageDialog(null, "Error al tomar la fecha, error de parse");
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Error al agregar el nuevo feriado");
+                JOptionPane.showMessageDialog(null, ex.getMessage());
             } 
         }
     }//GEN-LAST:event_BotonCargarActionPerformed
 
     private void calendarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_calendarioMouseClicked
         
-        try { 
-            Date  fecha=calendario.getDate();
-            DateFormat f=new SimpleDateFormat("dd-MM-yyyy");
-            String fecha2=f.format(fecha);
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(f.parse(fecha2));
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            String fechaFeriado= sdf.format(cal.getTime());
-            labelFecha.setText(fechaFeriado);
-        } catch (ParseException ex) {
-            JOptionPane.showMessageDialog(null, "Error al tomar la fecha, error de parse");
-        }
+        Date  fecha=calendario.getDate();
+        DateFormat f=new SimpleDateFormat("dd-MM-yyyy");
+        String fechaFeriado= f.format(fecha.getTime());
+        labelFecha.setText(fechaFeriado);
        
     }//GEN-LAST:event_calendarioMouseClicked
 

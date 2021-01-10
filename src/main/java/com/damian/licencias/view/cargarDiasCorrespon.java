@@ -1,18 +1,23 @@
 
 package com.damian.licencias.view;
 
-import java.util.List;
+import com.damian.licencias.controller.LicenciaController;
+import com.damian.licencias.model.DiasCorrespondiente;
+import com.damian.licencias.model.Empleado;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
 public class cargarDiasCorrespon extends javax.swing.JFrame {
-
+    private LicenciaController controlador;
+    private Empleado emple;
     
-    public cargarDiasCorrespon() {
+    public cargarDiasCorrespon(LicenciaController controlador) {
         initComponents();
-        
-         this.setTitle("Cargar Dias Correspondientes");
+        this.controlador=controlador;
+        this.setTitle("Cargar Dias Correspondientes");
         this.setResizable(false);
         this.setSize(630,460);
         this.setLocationRelativeTo(null);
@@ -22,24 +27,24 @@ public class cargarDiasCorrespon extends javax.swing.JFrame {
         this.setVisible(true);
     }
 
-    /*
-    cargar tabla
-    */
+    
+    //cargar tabla
+    
     private void cargarTablaCantDias(Empleado emp) {
 
-        List<> diascorresp = controladorEmp.buscarTurnosAtenderEmpleado(emp);
+        //List<DiasCorrespondiente> diascorresp = emp.getDiasCorrespondientes();
 
-        String matriz[][] = new String[empleados.size()][1];
+        String matriz[][] = new String[emp.getDiasCorrespondientes().size()][3];
         
-        if (!diascorresp.isEmpty()) {
+        if (!(emp.getDiasCorrespondientes().isEmpty())) {
             int i = 0;
-            for (DiasCorrespondiente d : diascorresp) {
-                if (d.algo no existe)) {
-                    matriz[i][0] = d.fecha;
-                    matriz[i][1] = d.fecha;
-                    matriz[i][2] = d.fecha;
+            for (DiasCorrespondiente d : emp.getDiasCorrespondientes()) {
+                    Calendar c1 = d.getFechaAnio();
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                    matriz[i][0] = String.valueOf(c1.get(Calendar.YEAR));
+                    matriz[i][1] = String.valueOf(d.getDias());
+                    matriz[i][2] = String.valueOf(d.isEstado());
                     i++;
-                }
             }
             tablaCantDias.setModel(new DefaultTableModel(
                     matriz,
@@ -48,7 +53,6 @@ public class cargarDiasCorrespon extends javax.swing.JFrame {
                     }
             ));
         } else {
-            JOptionPane.showMessageDialog(null, "No posee turnos para atender");
             tablaCantDias.setModel(new DefaultTableModel(
                     null,
                     new String[]{
@@ -146,16 +150,45 @@ public class cargarDiasCorrespon extends javax.swing.JFrame {
     private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
         dispose();
         //llamar a la ventana anterior
+        menuPrincipal irMenuPrin = new menuPrincipal(controlador);
     }//GEN-LAST:event_botonCancelarActionPerformed
 
     private void botonCargarDiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCargarDiasActionPerformed
-        // TODO add your handling code here:
+       if(!(TextAño.getText().equals("") || textCantDiasAño.getText().equals("") || textNroLegajo.getText().equals(""))){
+           try {
+               Calendar cal = Calendar.getInstance();
+               int anioAdd = Integer.parseInt(TextAño.getText());
+               cal.set(Calendar.YEAR, anioAdd);
+               int cantDiasAgregar = Integer.parseInt(textCantDiasAño.getText());
+               if(cantDiasAgregar>=0 && cantDiasAgregar<=30){
+                   DiasCorrespondiente diasAgregar = new DiasCorrespondiente(cal,cantDiasAgregar,Activo.getState());
+                   controlador.generarDiasCorrespondientesEmpleado(emple.getNroLegajo(), diasAgregar);
+                   this.cargarTablaCantDias(emple);
+                   this.setVisible(true);
+               }else{
+                   JOptionPane.showMessageDialog(null, "Cantidad de días incorrectos.");
+               }
+               
+           } catch (Exception ex) {
+               JOptionPane.showMessageDialog(null, ex.getMessage());  
+           }
+           
+       }else{
+            JOptionPane.showMessageDialog(null, "Debe completar todos los campos para continuar");  
+       }
     }//GEN-LAST:event_botonCargarDiasActionPerformed
 
     private void botonBuscarEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarEmpActionPerformed
-        // cuando se busca al emp ahi se carga su tabla
-         cargarTablaCantDias(emp);
-
+        if(!textNroLegajo.getText().equals("")){
+            emple=controlador.buscarEmpleado(Integer.parseInt(textNroLegajo.getText()));
+            if(emple != null){
+                this.cargarTablaCantDias(emple);
+            }else{
+                 JOptionPane.showMessageDialog(null, "No se encontró el empleado a cargar días correspondientes");
+            }
+        }else{
+             JOptionPane.showMessageDialog(null, "Debe completar todos los campos para continuar");
+        }  
     }//GEN-LAST:event_botonBuscarEmpActionPerformed
 
     

@@ -51,7 +51,15 @@ public class LicenciaController {
         }
         return feriadoBuscado;
     }
-    
+    public List<Feriado> buscarFeriadoPorAnio(int anioDeferiadosBusc){
+        List<Feriado> feriadosDelAnio = new ArrayList<Feriado>();
+        for(Feriado f : this.feriados){
+            if(f.getFechaFeriado().get(Calendar.YEAR)==anioDeferiadosBusc){
+                feriadosDelAnio.add(f);
+            }
+        }
+        return feriadosDelAnio;
+    }
     /**
      * Agregar un feriado a la lista de feriados.
      * @param feriadoNew
