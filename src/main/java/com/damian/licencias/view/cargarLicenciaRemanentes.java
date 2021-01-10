@@ -23,9 +23,9 @@ public class cargarLicenciaRemanentes extends javax.swing.JFrame {
     
     }
     
- /*
+    /*
     cargar tabla
-    */
+    
     private void cargarTablaLicencia() {
 
         List<DiasCorrespondiente> diascorresp = controladorEmp.buscarTurnosAtenderEmpleado(emp);
@@ -65,7 +65,7 @@ public class cargarLicenciaRemanentes extends javax.swing.JFrame {
 
      /*
     cargar tabla
-    */
+    
     private void cargartablaDiasEmpleado() {
 
         List<DiasCorrespondiente> diascorresp = controladorEmp.buscarTurnosAtenderEmpleado(emp);
@@ -98,8 +98,7 @@ public class cargarLicenciaRemanentes extends javax.swing.JFrame {
            
         }
     }
-   
-   
+   */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -227,7 +226,7 @@ public class cargarLicenciaRemanentes extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Seleccione un turno");
                 this.setVisible(true);
             } else {
-                turno = controladorTurno.buscarTurnoPorNro(nroturno);
+              //  turno = controladorTurno.buscarTurnoPorNro(nroturno);
 
             }
 

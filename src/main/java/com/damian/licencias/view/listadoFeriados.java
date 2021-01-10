@@ -1,23 +1,25 @@
 
 package com.damian.licencias.view;
 
+import com.damian.licencias.controller.LicenciaController;
+import com.damian.licencias.model.Feriado;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
 public class listadoFeriados extends javax.swing.JFrame {
-
+    private LicenciaController controlador;
    
-    public listadoFeriados() {
+    public listadoFeriados(LicenciaController control) {
         initComponents();
-        
+        this.controlador= control;
         this.setTitle("Listado feriados de un año");
         this.setResizable(false);
         this.setSize(650,520);
         this.setLocationRelativeTo(null);
-        cargarTablaFeriados();
-        
         
         this.setVisible(true);
     }
@@ -26,21 +28,21 @@ public class listadoFeriados extends javax.swing.JFrame {
     /*
     cargar tabla
     */
-    private void cargarTablaFeriados() {
+    private void cargarTablaFeriados(int anoFeriado) {
 
-        List<DiasCorrespondiente> diascorresp = controladorEmp.buscarTurnosAtenderEmpleado(emp);
+        List<Feriado> feriados = controladorbuscarFeriadoPorAno(anoFeriado);
 
-        String matriz[][] = new String[empleados.size()][1];
+        String matriz[][] = new String[feriados.size()][3];
         
-        if (!diascorresp.isEmpty()) {
+        if (!feriados.isEmpty()) {
             int i = 0;
-            for (DiasCorrespondiente d : diascorresp) {
-                if (d.algo no existe)) {
-                    matriz[i][0] = d.fecha;
-                    matriz[i][1] = d.fecha;
-                    matriz[i][2] = d.fecha;
+            for (Feriado f: feriados) {
+                Calendar c1 = f.getFechaFeriado();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                    matriz[i][0] = sdf.format(c1.getTime());
+                    matriz[i][1] = f.getDescripcion();
+                    matriz[i][2] = String.valueOf(f.isEstado());
                     i++;
-                }
             }
             tablaFeriados.setModel(new DefaultTableModel(
                     matriz,
@@ -49,14 +51,13 @@ public class listadoFeriados extends javax.swing.JFrame {
                     }
             ));
         } else {
-            JOptionPane.showMessageDialog(null, "No posee turnos para atender");
+            JOptionPane.showMessageDialog(null, "No existen feriados cargados");
             tablaFeriados.setModel(new DefaultTableModel(
                     null,
                     new String[]{
                        "Fecha", "Descripcion", "Estado"
                     }
             ));
-           
         }
     }
     
@@ -124,15 +125,25 @@ public class listadoFeriados extends javax.swing.JFrame {
 
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
         dispose();
-        //llamar a la ventana anterior
+        menuPrincipal volveramenu = new menuPrincipal(controlador);
     }//GEN-LAST:event_botonSalirActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // llamar a ventana cargarFeriado
+        dispose();
+        cargarFeriado iracargar=new cargarFeriado(controlador);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
-        // TODO add your handling code here:
+        if(!anoFeriado.getText().equals("")){
+            int anoabuscar = Integer.parseInt(anoFeriado.getText());
+            Feriado feriadoabuscar = controlador.buscarFeriadoPorAno(anoabuscar);
+            
+            cargarTablaFeriados(feriadoabuscar);
+            this.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(null, "debe ingresar un año a buscar");
+        }
+           
     }//GEN-LAST:event_botonBuscarActionPerformed
 
     

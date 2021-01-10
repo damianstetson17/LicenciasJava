@@ -2,6 +2,8 @@
 import com.damian.licencias.controller.LicenciaController;
 import com.damian.licencias.model.*;
 import com.damian.licencias.persistencia.Persistencia;
+import com.damian.licencias.view.cargarEmpleado;
+import com.damian.licencias.view.menuPrincipal;
 
 import java.util.Calendar;
 
@@ -13,7 +15,11 @@ import java.util.Calendar;
 public class Main {
 
     public static void main(String[] args) {
-        //conectar BD sqlite
+        
+        LicenciaController control= new LicenciaController ();
+        menuPrincipal ventana =new menuPrincipal(control);
+        
+        /*//conectar BD sqlite
         Persistencia persistencia = new Persistencia();
         persistencia.connect();
         //controlador
@@ -61,7 +67,8 @@ public class Main {
             System.out.println("\tdiasPedidos Lic:"+ l.getCantDiasPedidos());
             });
             System.out.println("\t\tTotal: "+ e.getLicencias().size());
-        });
+        });*/
+        
     }
 }
   

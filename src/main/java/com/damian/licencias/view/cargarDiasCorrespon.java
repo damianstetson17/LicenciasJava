@@ -25,9 +25,9 @@ public class cargarDiasCorrespon extends javax.swing.JFrame {
     /*
     cargar tabla
     */
-    private void cargarTablaCantDias() {
+    private void cargarTablaCantDias(Empleado emp) {
 
-        List<DiasCorrespondiente> diascorresp = controladorEmp.buscarTurnosAtenderEmpleado(emp);
+        List<> diascorresp = controladorEmp.buscarTurnosAtenderEmpleado(emp);
 
         String matriz[][] = new String[empleados.size()][1];
         
@@ -154,7 +154,7 @@ public class cargarDiasCorrespon extends javax.swing.JFrame {
 
     private void botonBuscarEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarEmpActionPerformed
         // cuando se busca al emp ahi se carga su tabla
-                cargarTablaCantDias();
+         cargarTablaCantDias(emp);
 
     }//GEN-LAST:event_botonBuscarEmpActionPerformed
 

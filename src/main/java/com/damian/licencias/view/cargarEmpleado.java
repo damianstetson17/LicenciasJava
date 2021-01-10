@@ -1,15 +1,25 @@
 package com.damian.licencias.view;
 
+import com.damian.licencias.controller.LicenciaController;
+import com.damian.licencias.model.Empleado;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
 public class cargarEmpleado extends javax.swing.JFrame {
-
+    private LicenciaController controlador;
    
-    public cargarEmpleado() {
+    public cargarEmpleado(LicenciaController control ) {
         initComponents();
+        this.controlador= control;
         this.setTitle("Cargar Empleado");
         this.setResizable(false);
         this.setSize(580,440);
@@ -26,19 +36,21 @@ public class cargarEmpleado extends javax.swing.JFrame {
     */
     private void cargarTablaEmpleado() {
 
-        List<Empleado> empleados = controladorEmp.buscarTurnosAtenderEmpleado(emp);
+        List<Empleado> empleados = this.controlador.getEmpleados();
 
-        String matriz[][] = new String[empleados.size()][1];
+        String matriz[][] = new String[empleados.size()][3];
         
         if (!empleados.isEmpty()) {
             int i = 0;
+           
             for (Empleado e : empleados) {
-                if (e.algo no existe)) {
-                    matriz[i][0] = f.fecha;
-                    matriz[i][1] = f.fecha;
-                    matriz[i][2] = f.fecha;
+                Calendar c1 = e.getAntiguedad();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                    matriz[i][0] = e.getNombreApellido();
+                    matriz[i][1] =String.valueOf(e.getNroLegajo());
+                    matriz[i][2] = sdf.format(c1.getTime()).toString();
                     i++;
-                }
+                
             }
             tablaEmpleado.setModel(new DefaultTableModel(
                     matriz,
@@ -47,7 +59,7 @@ public class cargarEmpleado extends javax.swing.JFrame {
                     }
             ));
         } else {
-            JOptionPane.showMessageDialog(null, "No posee turnos para atender");
+            JOptionPane.showMessageDialog(null, "No existen empleados cargados");
             tablaEmpleado.setModel(new DefaultTableModel(
                     null,
                     new String[]{
@@ -63,7 +75,6 @@ public class cargarEmpleado extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaEmpleado = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
@@ -75,7 +86,7 @@ public class cargarEmpleado extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         textNombre = new javax.swing.JTextField();
         textNroLegajo = new javax.swing.JTextField();
-        jDateChooserAntiguedadEmple = new com.toedter.calendar.JDateChooser();
+        fechaAntiguedad = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -124,18 +135,52 @@ public class cargarEmpleado extends javax.swing.JFrame {
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 90, 30));
         getContentPane().add(textNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 130, 30));
         getContentPane().add(textNroLegajo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 130, 30));
-        getContentPane().add(jDateChooserAntiguedadEmple, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 130, 30));
+        getContentPane().add(fechaAntiguedad, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 120, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
         dispose();
-        //llamar a la ventana anterior
+        menuPrincipal iramenu = new menuPrincipal(controlador);
     }//GEN-LAST:event_botonCancelarActionPerformed
 
     private void botonCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCargarActionPerformed
-        // TODO add your handling code here:
+        if(!textNombre.getText().equals("") && !textNroLegajo.getText().equals("") && fechaAntiguedad.getDate() !=null ){
+           int nroleg = Integer.parseInt( textNroLegajo.getText());
+           if(this.controlador.buscarEmpleado(nroleg)== null){
+                
+               try {
+                    Date  fecha=fechaAntiguedad.getDate();
+                    DateFormat f=new SimpleDateFormat("dd-MM-yyyy");
+                    String fecha2=f.format(fecha);
+                    Calendar cal = Calendar.getInstance();
+                    cal.setTime(f.parse(fecha2));
+                    Empleado emp = new Empleado(nroleg,textNombre.getText(),cal,true);
+                    if(emp == null){
+                        JOptionPane.showMessageDialog(null, "No se pudo crear al empleado");
+                    }else{
+                        controlador.addEmpleado(emp);
+                        cargarTablaEmpleado();
+                        this.setVisible(true);
+                    }
+                       
+               } catch (ParseException ex) {
+                   JOptionPane.showMessageDialog(null, "Error al tomar la fecha, error de parse");
+               } catch (Exception ex) {
+                   JOptionPane.showMessageDialog(null, "Error no se puede agregar al nuevo empleado");
+               }
+                 
+               
+           }else{
+                JOptionPane.showMessageDialog(null, "Ya existe el empleado con nro de legajo" +nroleg);
+                this.setVisible(true);
+
+           }             
+        }else{
+            JOptionPane.showMessageDialog(null, "Debe completar todos los campos para continuar");
+            this.setVisible(true);
+        }
     }//GEN-LAST:event_botonCargarActionPerformed
 
     private void elegirAntiguedadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_elegirAntiguedadMouseClicked
@@ -147,8 +192,7 @@ public class cargarEmpleado extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonCancelar;
     private javax.swing.JButton botonCargar;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooserAntiguedadEmple;
+    private com.toedter.calendar.JDateChooser fechaAntiguedad;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
