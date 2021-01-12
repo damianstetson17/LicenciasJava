@@ -1,19 +1,82 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.damian.licencias.model;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
 
 /**
  *
- * @author Damian
+ * @author piotr
  */
-public class Licencia implements Comparable<Licencia>{
+@Entity
+public class Licencia implements Serializable, Comparable<Licencia>{
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Calendar fechaInico = Calendar.getInstance(); 
+    
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Calendar fechaFin = Calendar.getInstance();
+    
     private int  cantDiasPedidos;
-    private List<DiasTomados> diasTomados = new ArrayList<>();
+    
+    @ManyToOne
+    @JoinColumn(name = "fk_diaTomado", nullable = false, updatable = true)
+    private DiasTomados diasTomados;
+    
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Licencia)) {
+            return false;
+        }
+        Licencia other = (Licencia) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "com.damian.licencias.model.Licencia[ id=" + id + " ]";
+    }
+
+    public Licencia() {
+    }
 
     /**
      *constructor
@@ -24,8 +87,8 @@ public class Licencia implements Comparable<Licencia>{
         this.fechaInico = fechaInico;
         this.cantDiasPedidos = cantDiasPedidos;
     }
-
-    public Calendar getFechaInicio() {
+    
+    public Calendar getFechaInico() {
         return fechaInico;
     }
 
@@ -49,19 +112,20 @@ public class Licencia implements Comparable<Licencia>{
         this.cantDiasPedidos = cantDiasPedidos;
     }
 
-    public List<DiasTomados> getDiasTomados() {
-        return diasTomados;
-    }
-
-    public void setDiasTomados(List<DiasTomados> diasTomados) {
-        this.diasTomados = diasTomados;
+    //compareTo de fecha mas vieja a mas nueva
+    
+    @Override
+    public int compareTo(Licencia o) {
+         return this.fechaInico.getTime().compareTo(o.getFechaInico().getTime()); 
     }
     
+    /*
     //add methods
     public void addDiasTomados(DiasTomados diasTomadosNew){
         this.diasTomados.add(diasTomadosNew);
         Collections.sort(this.diasTomados);
     }
+    
     
     //search method
     public DiasTomados buscarDiasTomados(DiasTomados diasTomados){
@@ -74,11 +138,14 @@ public class Licencia implements Comparable<Licencia>{
             }
         }
         return diasTomadosBuscados;
-    }
-    //compareTo de fecha mas vieja a mas nueva
+    }*/
 
-    @Override
-    public int compareTo(Licencia o) {
-         return this.fechaInico.getTime().compareTo(o.getFechaInicio().getTime()); 
+    public DiasTomados getDiasTomados() {
+        return diasTomados;
     }
+
+    public void setDiasTomados(DiasTomados diasTomados) {
+        this.diasTomados = diasTomados;
+    }
+    
 }
