@@ -33,8 +33,10 @@ Se ha ajustado levemente el diagra de clases del [Sistema de Licencias hecho en 
 
 ## 🚀 ¿Cómo ejecutar? 🚀
 
-Para ejecutar correctamente simplemente compilar el archivo [main.java](https://github.com/damianstetson17/LicenciasJava/blob/main/src/main/java/Main.java).
-Al finalizar el proyecto se incluirá el ejecutable.
+* Conectar la BD configurando el archivo [persistence.xml](https://github.com/damianstetson17/LicenciasJava/blob/main/src/main/resources/META-INF/persistence.xml).
+* Compilar el archivo [main.java](https://github.com/damianstetson17/LicenciasJava/blob/main/src/main/java/Main.java).
+* Ejecutar el archivo [main.java](https://github.com/damianstetson17/LicenciasJava/blob/main/src/main/java/Main.java).
+  Al finalizar el proyecto se incluirá el ejecutable.
 
 ### ¿Que me encontraré al compilar el archivo [main.java](https://github.com/damianstetson17/PyLicenciasPersonal/blob/main/src/main.py)?
 Que no te pierda la cantidad de contenido dentro del fichero [main.java](https://github.com/damianstetson17/PyLicenciasPersonal/blob/main/src/main.py), simplemente
