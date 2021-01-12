@@ -32,7 +32,7 @@ Se ha ajustado levemente el diagra de clases del [Sistema de Licencias hecho en 
 * [SQLite](https://www.sqlite.org/index.html)
 
 ## 🚀 ¿Cómo ejecutar? 🚀
-
+* Importar el proyecto Maven.
 * Conectar la BD configurando el archivo [persistence.xml](https://github.com/damianstetson17/LicenciasJava/blob/main/src/main/resources/META-INF/persistence.xml)
 * Compilar el archivo [main.java](https://github.com/damianstetson17/LicenciasJava/blob/main/src/main/java/Main.java)
 * Ejecutar el archivo [main.java](https://github.com/damianstetson17/LicenciasJava/blob/main/src/main/java/Main.java)
