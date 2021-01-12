@@ -9,7 +9,7 @@ Basado en el [Sistema de Licencias hecho en python](https://github.com/damianste
 ## Diagrama de Clases
 Se ha ajustado levemente el diagra de clases del [Sistema de Licencias hecho en python](https://github.com/damianstetson17/PyLicenciasPersonal) para ser más consistente y completo.
 
-![diagrama_de_clases](https://github.com/damianstetson17/LicenciasJava/blob/main/img/class_diagram_java.png)
+![diagrama_de_clases](https://github.com/damianstetson17/LicenciasJava/blob/main/class_diagram.png)
 
 ## ⚠️ Estado del proyecto ⚠️
 
