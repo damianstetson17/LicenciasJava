@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.damian.licencias.model;
 
 import java.io.Serializable;
@@ -38,9 +33,11 @@ public class Licencia implements Serializable, Comparable<Licencia>{
     
     private int  cantDiasPedidos;
     
-    @ManyToOne
+    //@ManyToOne
+    @OneToMany
     @JoinColumn(name = "fk_diaTomado", nullable = false, updatable = true)
-    private DiasTomados diasTomados;
+    //private DiasTomados diasTomados;
+    private List<DiasTomados> diasTomados;
     
     public Long getId() {
         return id;
@@ -88,7 +85,7 @@ public class Licencia implements Serializable, Comparable<Licencia>{
         this.cantDiasPedidos = cantDiasPedidos;
     }
     
-    public Calendar getFechaInico() {
+    public Calendar getFechaInicio() {
         return fechaInico;
     }
 
@@ -113,13 +110,12 @@ public class Licencia implements Serializable, Comparable<Licencia>{
     }
 
     //compareTo de fecha mas vieja a mas nueva
-    
     @Override
     public int compareTo(Licencia o) {
-         return this.fechaInico.getTime().compareTo(o.getFechaInico().getTime()); 
+         return this.fechaInico.getTime().compareTo(o.getFechaInicio().getTime()); 
     }
     
-    /*
+    
     //add methods
     public void addDiasTomados(DiasTomados diasTomadosNew){
         this.diasTomados.add(diasTomadosNew);
@@ -138,13 +134,13 @@ public class Licencia implements Serializable, Comparable<Licencia>{
             }
         }
         return diasTomadosBuscados;
-    }*/
+    }
 
-    public DiasTomados getDiasTomados() {
+    public List<DiasTomados> getDiasTomados() {
         return diasTomados;
     }
 
-    public void setDiasTomados(DiasTomados diasTomados) {
+    public void setDiasTomados(List<DiasTomados> diasTomados) {
         this.diasTomados = diasTomados;
     }
     

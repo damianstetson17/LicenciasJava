@@ -1,4 +1,3 @@
-
 package com.damian.licencias.view;
 
 import com.damian.licencias.controller.LicenciaController;
@@ -16,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
 
 
 public class cargarFeriado extends javax.swing.JFrame {
-    private LicenciaController controlador;
+   private LicenciaController controlador;
 
     public cargarFeriado(LicenciaController control ) {
         initComponents();
@@ -30,9 +29,8 @@ public class cargarFeriado extends javax.swing.JFrame {
         this.setVisible(true);
     }
 
-    /*
-    cargar tabla
-    */
+    //cargar tabla
+    
     private void cargarTablaFeriado() {
 
         List<Feriado> feriados = this.controlador.getFeriados();
@@ -150,24 +148,24 @@ public class cargarFeriado extends javax.swing.JFrame {
     }//GEN-LAST:event_botonCancelarActionPerformed
 
     private void BotonCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonCargarActionPerformed
-        if(/*(calendario.getDate() == null )&&*/( textDescripcion.getText().equals(""))){
+        if((calendario.getDate() == null )||( textDescripcion.getText().equals(""))){
             JOptionPane.showMessageDialog(null, "debe completar todos los campos");
         }else{
-            try {
+            try{
                 Date  fecha=calendario.getDate();
                 DateFormat f=new SimpleDateFormat("dd-MM-yyyy");
                 String fecha2=f.format(fecha);
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(f.parse(fecha2));
-               /*if( controlador.buscarFeriado(cal)!= null){
+               if( controlador.buscarFeriado(cal)!= null){
                     JOptionPane.showMessageDialog(null, "El feriado ingresado ya existe");
-               }else{*/
+               }else{
                    
                    Feriado feriadoCreado = new Feriado(textDescripcion.getText(),cal);
                    controlador.addFeriado(feriadoCreado);
                    cargarTablaFeriado();
                    this.setVisible(true);
-               //}
+               }
             } catch (ParseException ex) {
                 JOptionPane.showMessageDialog(null, "Error al tomar la fecha, error de parse");
             } catch (Exception ex) {
@@ -184,7 +182,7 @@ public class cargarFeriado extends javax.swing.JFrame {
         labelFecha.setText(fechaFeriado);
        
     }//GEN-LAST:event_calendarioMouseClicked
-
+    
     private void textDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textDescripcionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textDescripcionActionPerformed

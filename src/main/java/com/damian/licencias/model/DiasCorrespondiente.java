@@ -15,7 +15,7 @@ import javax.persistence.Temporal;
 
 
 @Entity
-public class DiasCorrespondiente implements Serializable {
+public class DiasCorrespondiente implements Serializable, Comparable<DiasCorrespondiente> {
 
     private static final long serialVersionUID = 1L;
     @Id

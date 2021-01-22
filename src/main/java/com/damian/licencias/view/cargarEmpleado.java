@@ -8,8 +8,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -25,15 +23,11 @@ public class cargarEmpleado extends javax.swing.JFrame {
         this.setSize(580,440);
         this.setLocationRelativeTo(null);
         cargarTablaEmpleado();
-        
-        
-        
         this.setVisible(true);
     }
 
-     /*
-    cargar tabla
-    */
+    //cargar tabla
+    
     private void cargarTablaEmpleado() {
 
         List<Empleado> empleados = this.controlador.getEmpleados();
@@ -49,8 +43,7 @@ public class cargarEmpleado extends javax.swing.JFrame {
                     matriz[i][0] = e.getNombreApellido();
                     matriz[i][1] =String.valueOf(e.getNroLegajo());
                     matriz[i][2] = sdf.format(c1.getTime()).toString();
-                    i++;
-                
+                    i++;     
             }
             tablaEmpleado.setModel(new DefaultTableModel(
                     matriz,
@@ -69,8 +62,7 @@ public class cargarEmpleado extends javax.swing.JFrame {
            
         }
     }
-    
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -148,8 +140,7 @@ public class cargarEmpleado extends javax.swing.JFrame {
     private void botonCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCargarActionPerformed
         if(!textNombre.getText().equals("") && !textNroLegajo.getText().equals("") && fechaAntiguedad.getDate() !=null ){
            int nroleg = Integer.parseInt( textNroLegajo.getText());
-           if(this.controlador.buscarEmpleado(nroleg)== null){
-                
+           if(this.controlador.buscarEmpleado(nroleg)== null){  
                try {
                     Date  fecha=fechaAntiguedad.getDate();
                     DateFormat f=new SimpleDateFormat("dd-MM-yyyy");
@@ -163,15 +154,12 @@ public class cargarEmpleado extends javax.swing.JFrame {
                         controlador.addEmpleado(emp);
                         cargarTablaEmpleado();
                         this.setVisible(true);
-                    }
-                       
+                    }           
                } catch (ParseException ex) {
                    JOptionPane.showMessageDialog(null, "Error al tomar la fecha, error de parse");
                } catch (Exception ex) {
                    JOptionPane.showMessageDialog(null, ex.getMessage());
-               }
-                 
-               
+               }       
            }else{
                 JOptionPane.showMessageDialog(null, "Ya existe el empleado con nro de legajo" +nroleg);
                 this.setVisible(true);
@@ -185,7 +173,6 @@ public class cargarEmpleado extends javax.swing.JFrame {
 
     private void elegirAntiguedadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_elegirAntiguedadMouseClicked
         //aca poner codigo de que hacer cuandos se hace click en la antiguedad
-
     }//GEN-LAST:event_elegirAntiguedadMouseClicked
 
   

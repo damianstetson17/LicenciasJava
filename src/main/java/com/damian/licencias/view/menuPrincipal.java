@@ -13,9 +13,7 @@ public class menuPrincipal extends javax.swing.JFrame {
         this.setResizable(false);
         this.setSize(430,330);
         this.setLocationRelativeTo(null);
-       
         this.setVisible(true);
-        
     }
 
    
@@ -92,6 +90,11 @@ public class menuPrincipal extends javax.swing.JFrame {
         jMenu6.setText("Licencia");
 
         jMenuItem5.setText("Por cantidad de días");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu6.add(jMenuItem5);
 
         jMenuItem6.setText("Por días remanentes");
@@ -207,7 +210,10 @@ public class menuPrincipal extends javax.swing.JFrame {
          cargarDiasCorrespon irCargarDiasCorresp = new cargarDiasCorrespon(controlador);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+         dispose();
+         cargarLicenciaAuto ircargarLicenciaAuto = new cargarLicenciaAuto(controlador);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonSalir;

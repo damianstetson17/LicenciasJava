@@ -1,51 +1,52 @@
 package com.damian.licencias.view;
 
-
+import com.damian.licencias.controller.LicenciaController;
+import com.damian.licencias.model.DiasTomados;
+import com.damian.licencias.model.Empleado;
+import com.damian.licencias.model.Licencia;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
 public class listadoLicencia extends javax.swing.JFrame {
-
+    private LicenciaController controlador;
    
-    public listadoLicencia() {
+    public listadoLicencia(LicenciaController control) {
         initComponents();
-        
-        
+        this.controlador=control;
         this.setTitle("Listado Licencia de un Empleado");
         this.setResizable(false);
         this.setSize(650,520);
         this.setLocationRelativeTo(null);
-
-        
-        
-        
         this.setVisible(true);
     }
-    
-    
-    /*
-    cargar tabla
-    
-    private void cargarTablaLicenciaEmp() {
+ 
+    //cargar tabla
+    private void cargarTablaLicenciaEmp(Empleado emple) {
 
-        List<> diascorresp = controladorEmp.buscarTurnosAtenderEmpleado(emp);
+        List<Licencia> licencias = emple.getLicencias();
 
-        String matriz[][] = new String[empleados.size()][1];
+        String matriz[][] = new String[licencias.size()][1];
         
-        if (!diascorresp.isEmpty()) {
+        if (!licencias.isEmpty()) {
             int i = 0;
-            for (DiasCorrespondiente a : diascorresp) {
-                if (a.algo no existe)) {
-                    matriz[i][0] = a.fechainiciolicencia;
-                    matriz[i][1] = a.diascorrespondientes;
-                    matriz[i][2] = a.diastomados;
-                    matriz[i][3] = a.año;
-                    matriz[i][4] = a.año;
-                    matriz[i][5] = a.año;
+            for (Licencia l : licencias) {
+                    Calendar c1 = l.getFechaInicio();
+                    Calendar c2 = l.getFechaFin();
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                    matriz[i][0] = String.valueOf(c1.get(Calendar.YEAR));
+                    matriz[i][1] = String.valueOf(c2.get(Calendar.YEAR));
+                    for(DiasTomados dias : l.getDiasTomados()){
+                        Calendar c3 = dias.getAnioDiasCorresp().getFechaAnio();
+                        matriz[i][2] = String.valueOf(c3.get(Calendar.YEAR));
+                        matriz[i][3] = String.valueOf(dias.getAnioDiasCorresp().getDias()+dias.getCantidadDias());
+                        matriz[i][4] = String.valueOf(dias.getCantidadDias());
+                        matriz[i][5] = String.valueOf(dias.getAnioDiasCorresp().getDias());
+                        i++;
+                    }
                     i++;
-                }
             }
             tablaLicencia.setModel(new DefaultTableModel(
                     matriz,
@@ -60,12 +61,9 @@ public class listadoLicencia extends javax.swing.JFrame {
                     new String[]{
                         "Fecha Inicio", "Fecha Fin", "Año", "Cantidad Disponibles", "Usufructuó", "Dias Remanentes"
                     }
-            ));
-           
+            ));    
         }
     }
-    
-    */
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -89,7 +87,7 @@ public class listadoLicencia extends javax.swing.JFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Fecha Inicio", "Fecha Fin", "Año", "Cantidad Disponibles", "Usufructuó", "Dias Remanentes"
+                "Fecha Inicio", "Fecha Fin", "Año", "Cantidad Disponibles", "Usufructuó", "Días Remanentes"
             }
         ));
         jScrollPane1.setViewportView(tablaLicencia);
@@ -135,14 +133,18 @@ public class listadoLicencia extends javax.swing.JFrame {
 
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
         //cuando se apreta buscar se toma el nrolegajo del textfield y se busca al empleado y llama a cargar tabla de licencias
-                
-     //   cargarTablaLicenciaEmp();
-        
-        
+        if(!textNroLegajo.getText().equals("")){
+            Empleado emple=controlador.buscarEmpleado(Integer.parseInt(textNroLegajo.getText()));
+            if(emple != null){
+                this.cargarTablaLicenciaEmp(emple);
+            }else{
+                 JOptionPane.showMessageDialog(null, "No se encontró el empleado a listar sus licencias.");
+            }
+        }else{
+             JOptionPane.showMessageDialog(null, "Debe completar todos los campos para continuar.");
+        }        
     }//GEN-LAST:event_botonBuscarActionPerformed
 
-    
-  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonBuscar;
     private javax.swing.JButton botonSalir;

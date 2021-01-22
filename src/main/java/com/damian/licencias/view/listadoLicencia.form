@@ -46,7 +46,7 @@
                 <Column editable="true" title="A&#xf1;o" type="java.lang.Object"/>
                 <Column editable="true" title="Cantidad Disponibles" type="java.lang.Object"/>
                 <Column editable="true" title="Usufructu&#xf3;" type="java.lang.Object"/>
-                <Column editable="true" title="Dias Remanentes" type="java.lang.Object"/>
+                <Column editable="true" title="D&#xed;as Remanentes" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">

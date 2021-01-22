@@ -1,40 +1,38 @@
-
 package com.damian.licencias.view;
 
+import com.damian.licencias.controller.LicenciaController;
+import com.damian.licencias.model.DiasCorrespondiente;
+import com.damian.licencias.model.Licencia;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
 public class cargarLicenciaAntigua extends javax.swing.JFrame {
-
-   
-    public cargarLicenciaAntigua() {
-        initComponents();
+    private LicenciaController controlador;
     
-     this.setTitle("Cargar Licencia antigua");
+    public cargarLicenciaAntigua(LicenciaController control) {
+        controlador=control;
+        //initComponents();
+        this.setTitle("Cargar Licencia antigua");
         this.setResizable(false);
         this.setSize(775,620);
         this.setLocationRelativeTo(null);
-        
-        
-        
         this.setVisible(true);
-    
     }
-     /*
-    cargar tabla
-    
+    /*
+    //cargar tabla
     private void cargarTablaLicencia() {
 
-        List<DiasCorrespondiente> diascorresp = controladorEmp.buscarTurnosAtenderEmpleado(emp);
+        List<Licencia> licencias = controlador.buscarEmpleado(nroBuscadoEmple).getLicencias();
 
-        String matriz[][] = new String[empleados.size()][1];
+        String matriz[][] = new String[licencias.size()][1];
         
-        if (!diascorresp.isEmpty()) {
+        if (!licencias.isEmpty()) {
             int i = 0;
-            for (DiasCorrespondiente d : diascorresp) {
-                if (d.algo no existe)) {
+            for (Licencias l : licencias) {
                     matriz[i][0] = d.fecha;
                     matriz[i][1] = d.fecha;
                     matriz[i][2] = d.fecha;
@@ -42,7 +40,6 @@ public class cargarLicenciaAntigua extends javax.swing.JFrame {
                     matriz[i][4] = d.fecha;
                     matriz[i][5] = d.fecha;
                     i++;
-                }
             }
             tablaLicencia.setModel(new DefaultTableModel(
                     matriz,
@@ -61,24 +58,24 @@ public class cargarLicenciaAntigua extends javax.swing.JFrame {
            
         }
     }
-
-     /*
-    cargar tabla
     
-    private void cargartablaDiasCorrespondienteEmpleado() {
+    
+    //cargar tabla
+    private void cargartablaDiasCorrespondienteEmpleado(int nrolegajoBuscado) {
 
-        List<DiasCorrespondiente> diascorresp = controladorEmp.buscarTurnosAtenderEmpleado(emp);
+        List<DiasCorrespondiente> diascorresp = controlador.buscarEmpleado(nrolegajoBuscado).getDiasCorrespondientes();
 
-        String matriz[][] = new String[empleados.size()][1];
+        String matriz[][] = new String[diascorresp.size()][1];
         
         if (!diascorresp.isEmpty()) {
             int i = 0;
             for (DiasCorrespondiente d : diascorresp) {
-                if (d.algo no existe)) {
-                    matriz[i][0] = d.fecha;
-                    matriz[i][1] = d.fecha;
+                    Calendar c1 = d.getFechaAnio();
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                    matriz[i][0] = String.valueOf(c1.get(Calendar.YEAR));
+                    matriz[i][1] = String.valueOf(d.getDias());
+                    matriz[i][2] = String.valueOf(d.isEstado());
                     i++;
-                }
             }
             tablaDiasCorrespondienteEmpleado.setModel(new DefaultTableModel(
                     matriz,
@@ -96,8 +93,7 @@ public class cargarLicenciaAntigua extends javax.swing.JFrame {
             ));
            
         }
-    }
-   */
+    }*/
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -124,10 +120,10 @@ public class cargarLicenciaAntigua extends javax.swing.JFrame {
 
         tablaDiasCorrespondienteEmpleado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null}
+                {null, null, null}
             },
             new String [] {
-                "Año", "Dias Disponibles"
+                "Año", "Dias Disponibles", "Estado"
             }
         ));
         tablaDiasCorrespondienteEmpleado.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -217,35 +213,33 @@ public class cargarLicenciaAntigua extends javax.swing.JFrame {
 
     private void botonBuscarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarEmpleadoActionPerformed
         // TODO add your handling code here:
-     //   cargartablaDiasCorrespondienteEmpleado();
+        //cargartablaDiasCorrespondienteEmpleado(Integer.parseInt(textNroLegajo.getText()));
     }//GEN-LAST:event_botonBuscarEmpleadoActionPerformed
 
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
         dispose();
         // llamar a ventana menu
+        menuPrincipal irMenuPrin = new menuPrincipal(controlador);
     }//GEN-LAST:event_botonSalirActionPerformed
 
     private void tablaLicenciaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaLicenciaMouseClicked
         // aca se selecciona el objeto se lo busca y borra los dias seleccionados
         int row = tablaLicencia.rowAtPoint(evt.getPoint());
         if (row >= 0) {
-
             String año = tablaLicencia.getValueAt(row, 0).toString();
-            
-
         }
     }//GEN-LAST:event_tablaLicenciaMouseClicked
 
     private void botonOcuparDiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonOcuparDiasActionPerformed
         // TODO add your handling code here:
-       // cargarTablaLicencia();
+         //cargarTablaLicencia();
          this.setVisible(true);
     }//GEN-LAST:event_botonOcuparDiasActionPerformed
 
     private void botonQuitarDiasLicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonQuitarDiasLicActionPerformed
         // 
     }//GEN-LAST:event_botonQuitarDiasLicActionPerformed
-
+    
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -266,4 +260,5 @@ public class cargarLicenciaAntigua extends javax.swing.JFrame {
     private javax.swing.JTextField textCantDiasdeAno;
     private javax.swing.JTextField textNroLegajo;
     // End of variables declaration//GEN-END:variables
+
 }

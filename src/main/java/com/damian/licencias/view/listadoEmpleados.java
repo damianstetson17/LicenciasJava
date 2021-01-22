@@ -1,4 +1,3 @@
-
 package com.damian.licencias.view;
 
 import com.damian.licencias.controller.LicenciaController;
@@ -10,8 +9,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class listadoEmpleados extends javax.swing.JFrame {
-
     private LicenciaController controlador;
+    
     public listadoEmpleados(LicenciaController control ) {
         initComponents();
         this.controlador= control;
@@ -20,14 +19,10 @@ public class listadoEmpleados extends javax.swing.JFrame {
         this.setSize(588,500);
         this.setLocationRelativeTo(null);
         cargartablaEmpleados();
-        
-        
         this.setVisible(true);
     }
 
-    /*
-    cargar tabla
-    */
+    //cargar tabla
     private void cargartablaEmpleados() {
 
         List<Empleado> empleados = controlador.getEmpleados();
@@ -59,8 +54,7 @@ public class listadoEmpleados extends javax.swing.JFrame {
                     new String[]{
                       "Nro Legajo", "Nombre y Apellido", "Antiguedad", "Activo"
                     }
-            ));
-           
+            ));  
         }
     }
     @SuppressWarnings("unchecked")
@@ -119,8 +113,6 @@ public class listadoEmpleados extends javax.swing.JFrame {
         dispose();
         cargarEmpleado iracargar=new cargarEmpleado(controlador);
     }//GEN-LAST:event_botonCargarEmpleadoActionPerformed
-
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonCargarEmpleado;

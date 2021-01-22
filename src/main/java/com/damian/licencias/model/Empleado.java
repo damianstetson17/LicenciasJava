@@ -7,6 +7,7 @@ package com.damian.licencias.model;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -38,13 +39,19 @@ public class Empleado implements Serializable {
     
     private boolean estado;
     
-    @ManyToOne
+    /*@ManyToOne
     @JoinColumn(name = "fk_diaCorresp", nullable = true, updatable = true)
-    private DiasCorrespondiente diasCorrespondientes;
+    private DiasCorrespondiente diasCorrespondientes;*/
     
-    @ManyToOne
+    @OneToMany
+    @JoinColumn(name = "fk_diaCorresp", nullable = true, updatable = true)
+    private List<DiasCorrespondiente> diasCorrespondientes;
+    
+    //@ManyToOne
+    @OneToMany
     @JoinColumn(name = "fk_licencia", nullable = true, updatable = true)
-    private Licencia licencias;
+    //private Licencia licencias;
+    private List<Licencia> licencias;
     
     public Long getId() {
         return id;
@@ -129,21 +136,53 @@ public class Empleado implements Serializable {
         this.estado = estado;
     }
     
-    public DiasCorrespondiente getDiasCorrespondientes() {
+    public List<DiasCorrespondiente> getDiasCorrespondientes() {
         return diasCorrespondientes;
     }
 
-    public void setDiasCorrespondientes(DiasCorrespondiente diasCorrespondientes) {
-        this.diasCorrespondientes = diasCorrespondientes;
+    public void setDiasCorrespondientes(List<DiasCorrespondiente> diasCorrespondientesNew) {
+        this.diasCorrespondientes = diasCorrespondientesNew;
     }
 
-    public Licencia getLicencias() {
+    public List<Licencia> getLicencias() {
         return licencias;
     }
 
-    public void setLicencias(Licencia licencias) {
+    public void setLicencias(List<Licencia> licencias) {
         this.licencias = licencias;
     }
     
+    public DiasCorrespondiente buscarDiasCorrespondiente(Calendar fechadiasBuscados){
+        DiasCorrespondiente diasBuscados = null;
+        for(DiasCorrespondiente d : this.diasCorrespondientes){
+            //si los anios coinciden
+            if(d.getFechaAnio().get(Calendar.YEAR) == fechadiasBuscados.get(Calendar.YEAR)){
+                diasBuscados = d;
+                break;
+            }
+        }
+        return diasBuscados;
+    }
+    
+    public Licencia buscarLicencia (Calendar fechaLicBuscada){
+        Licencia licBuscada = null;
+        for(Licencia l : this.licencias){
+            if(l.getFechaInicio().get(Calendar.YEAR) == fechaLicBuscada.get(Calendar.YEAR)){
+                licBuscada = l;
+                break;
+            }
+        }
+        return licBuscada;
+    }
+     //add methods
+    public void addDiasCorrespondiente(DiasCorrespondiente diasNew){
+        this.diasCorrespondientes.add(diasNew);
+        Collections.sort(this.diasCorrespondientes);
+    }
+    
+    public void addLicencia(Licencia licNew){
+        this.licencias.add(licNew);
+        Collections.sort(this.licencias);
+    }
     
 }

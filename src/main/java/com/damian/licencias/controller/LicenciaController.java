@@ -1,5 +1,6 @@
 package com.damian.licencias.controller;
 
+import com.damian.licencias.JpaController.*;
 import com.damian.licencias.model.*;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -10,38 +11,38 @@ import static java.util.Objects.isNull;
  *
  * @author Damian
  */
-public class LicenciaController {
-    private List<Empleado> empleados = new ArrayList<>();
-    private List<Feriado> feriados = new ArrayList<>();
+public class LicenciaController{
+    private Conexion conn;
+    private FeriadoJpaController feriadoController = new FeriadoJpaController(this.conn.getEmf());
+    private EmpleadoJpaController empleadoController = new EmpleadoJpaController(this.conn.getEmf());
+    private DiasTomadosJpaController diasTomadosController = new DiasTomadosJpaController(this.conn.getEmf());
+    private DiasCorrespondienteJpaController diasCorrespondientesController = new DiasCorrespondienteJpaController(this.conn.getEmf());
+    private LicenciaJpaController licenciaController = new LicenciaJpaController(this.conn.getEmf());
 
+    LicenciaController(Conexion conn){
+        this.conn=conn;
+    }
     //getters & setters
     public List<Empleado> getEmpleados() {
-        return empleados;
+        return empleadoController.findEmpleadoEntities();
     }
 
-    public void setEmpleados(List<Empleado> empleados) {
-        this.empleados = empleados;
-    }
 
     public List<Feriado> getFeriados() {
-        return feriados;
-    }
-
-    public void setFeriados(List<Feriado> feriados) {
-        this.feriados = feriados;
+        return feriadoController.findFeriadoEntities();
     }
 
     //FERIADO
 
     /**
-     *  Buscar un feriado según una fecha.
+     * Buscar un feriado según una fecha.
      * @param fechaFeridadoBusc
      * @return feriadoBuscado
      */
     public Feriado buscarFeriado(Calendar fechaFeridadoBusc){
         System.out.println(("\t>>LLAMADO AL MÓDULO BUSCAR FERIADO"));
         Feriado feriadoBuscado = null;
-        for(Feriado f : this.feriados){
+        for(Feriado f : getFeriados()){
             if((f.getFechaFeriado().get(Calendar.YEAR) == fechaFeridadoBusc.get(Calendar.YEAR))
                     &&((f.getFechaFeriado().get(Calendar.DAY_OF_YEAR) == fechaFeridadoBusc.get(Calendar.DAY_OF_YEAR)))
                     &&((f.getFechaFeriado().get(Calendar.MONTH) == fechaFeridadoBusc.get(Calendar.MONTH)))){
@@ -52,6 +53,16 @@ public class LicenciaController {
         return feriadoBuscado;
     }
     
+    public List<Feriado> buscarFeriadoPorAnio(int anoFeriado) {
+       List<Feriado> feriadosDelAnio = new ArrayList<>();
+       for(Feriado f: feriadoController.findFeriadoEntities()){
+           if(f.getFechaFeriado().get(Calendar.YEAR) == anoFeriado){
+               feriadosDelAnio.add(f);
+            }
+       }
+       return feriadosDelAnio;
+    }  
+    
     /**
      * Agregar un feriado a la lista de feriados.
      * @param feriadoNew
@@ -61,7 +72,7 @@ public class LicenciaController {
         System.out.println("\t>>LLAMADO AL MÓDULO CREAR FERIADO");
         Feriado feriadoDupli = this.buscarFeriado(feriadoNew.getFechaFeriado());
         if(isNull(feriadoDupli)){
-            this.feriados.add(feriadoNew);
+            feriadoController.create(feriadoNew);
             System.out.println("\t\t>Se insertó el feriado '"+feriadoNew.getFechaFeriado().getTime()+"'");
         }else{
             throw new Exception("Ya existe un feriado con la fecha '"
@@ -79,6 +90,7 @@ public class LicenciaController {
         Feriado feriadoExis = this.buscarFeriado(dechaFeriadoDel);
         if(feriadoExis != null){
             feriadoExis.setEstado(false);
+            feriadoController.edit(feriadoExis);
             System.out.println("\t\t> Se cambió el estado del feriado '"+
                     feriadoExis.getFechaFeriado().getTime() + "'");
         }else{
@@ -97,7 +109,7 @@ public class LicenciaController {
     public Empleado buscarEmpleado(int nroLegajoBuscado){
         System.out.println(("\t>>LLAMADO AL MÓDULO BUSCAR EMPLEADO"));
         Empleado empleadoBuscado = null;
-        for(Empleado e : this.empleados){
+        for(Empleado e : empleadoController.findEmpleadoEntities()){
             if(e.getNroLegajo() == nroLegajoBuscado){
                 empleadoBuscado=e;
                 break;
@@ -115,7 +127,7 @@ public class LicenciaController {
         System.out.println("\t>>LLAMADO AL MÓDULO CREAR EMPLEADO");
         Empleado empleadoDupli = this.buscarEmpleado(empleadoNew.getNroLegajo());
         if(isNull(empleadoDupli)){
-            this.empleados.add(empleadoNew);
+            empleadoController.create(empleadoNew);
             System.out.println("\t\t>Se insertó el empleado con el legajo '"+empleadoNew.getNroLegajo()+"'");
         }else{
             throw new Exception("Ya existe un empleado con el nro de legajo '"
@@ -140,7 +152,7 @@ public class LicenciaController {
             
             /*not implemented the modif of list licencias and diascorresp,
             they have their own methods*/
-                    
+            empleadoController.edit(empleMod);
             System.out.println("\t\t> Se cambió el estado del empleado '"+
                     empleadoExis.isEstado() + "'");
         }else{
@@ -159,6 +171,7 @@ public class LicenciaController {
         Empleado empleadoExis = this.buscarEmpleado(nroLegajoEmpleDel);
         if(empleadoExis != null){
             empleadoExis.setEstado(false);
+            empleadoController.edit(empleadoExis);
             System.out.println("\t\t> Se cambió el estado del empleado a '"+
                     empleadoExis.isEstado() + "'");
         }else{
@@ -182,6 +195,7 @@ public class LicenciaController {
             DiasCorrespondiente diasDuplicado = empleAgregarDias.buscarDiasCorrespondiente(diasAgregar.getFechaAnio());
             if(isNull(diasDuplicado)){//si ya no existe dias asociados de ese anio
                 empleAgregarDias.addDiasCorrespondiente(diasAgregar);
+                empleadoController.edit(empleAgregarDias);
                 System.out.println("\t\t> Se agregaron al empleado legajo nro '"+
                     empleAgregarDias.getNroLegajo()+ "'" + "'"+diasAgregar.getDias()+
                     "' días del año '"+diasAgregar.getFechaAnio().get(Calendar.YEAR)+"'");
@@ -280,8 +294,12 @@ public class LicenciaController {
                     newLicencia = this.calcularFechaFinLicencia(newLicencia);
                     //generamos sus dias tomados
                     newLicencia = this.insertarDiasALicencia(nroLegajoBuscado,newLicencia);
+                    ////////////////////////////////////////////////capaz falte create la lic aca
                     //insertamos la nueva licencia a la lista del empleado
                     empleado.addLicencia(newLicencia);
+                    empleadoController.edit(empleado);
+                    System.out.println("lic pidio: "+newLicencia.getCantDiasPedidos());
+                    //licenciaController.create(newLicencia);
                     System.out.println("\t\t>Se insertó la licencia del '"
                             +newLicencia.getFechaFin().getTime()+"\n\t\t' al empleado legajo '"
                             +empleado.getNroLegajo()+"'");
@@ -343,7 +361,7 @@ public class LicenciaController {
      * @throws java.lang.Exception
      */
     private Licencia insertarDiasALicencia(int nroLegajoBuscado, Licencia newLicencia) {
-        System.out.println("\t>>LLAMADO AL MÓDULO INSERTAR LICENCIA");
+        System.out.println("\t>>LLAMADO AL MÓDULO INSERTAR DIAS A LICENCIA");
         Empleado empleado = this.buscarEmpleado(nroLegajoBuscado);
         int cantDiasPedidos = newLicencia.getCantDiasPedidos();
         int diasPedidosCorresp = 0;
@@ -396,8 +414,10 @@ public class LicenciaController {
             if(newLicencia.buscarDiasTomados(diasTomados) == null){
                 //actualizamos los dias corresp
                 diasTomados.getAnioDiasCorresp().setDias((diasTomados.getAnioDiasCorresp().getDias()-diasTomados.getCantidadDias()));
+                /////////////////////////////////////////////////////////////capaz falte edi o create de diatomados
                 //agregamos los dias tomados a la lic
                 newLicencia.addDiasTomados(diasTomados);
+                licenciaController.edit(newLicencia);
                 System.out.println("\t\t>Se actualizaron los días correspondientes del año '"
                         +diasTomados.getAnioDiasCorresp().getFechaAnio().get(Calendar.YEAR)
                         +"' a '"+diasTomados.getAnioDiasCorresp().getDias()+"' días (Se insertaron en la licencia '"+newLicencia.getFechaInicio().getTime()+"')");
@@ -410,5 +430,4 @@ public class LicenciaController {
         }
         return newLicencia;
     }
-    
 }

@@ -11,7 +11,7 @@ import javax.swing.table.DefaultTableModel;
 
 
 public class listadoFeriados extends javax.swing.JFrame {
-    private LicenciaController controlador;
+   private LicenciaController controlador;
    
     public listadoFeriados(LicenciaController control) {
         initComponents();
@@ -72,7 +72,7 @@ public class listadoFeriados extends javax.swing.JFrame {
         tablaFeriados = new javax.swing.JTable();
         botonBuscar = new javax.swing.JButton();
         botonSalir = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnCargarFeriadoNew = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -104,21 +104,21 @@ public class listadoFeriados extends javax.swing.JFrame {
         });
         getContentPane().add(botonBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 80, 90, 30));
 
-        botonSalir.setText("Salir");
+        botonSalir.setText("Cancelar");
         botonSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonSalirActionPerformed(evt);
             }
         });
-        getContentPane().add(botonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 400, 80, 40));
+        getContentPane().add(botonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 400, 120, 40));
 
-        jButton1.setText("Cargar nuevo Feriado");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnCargarFeriadoNew.setText("Cargar nuevo Feriado");
+        btnCargarFeriadoNew.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnCargarFeriadoNewActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, 150, 40));
+        getContentPane().add(btnCargarFeriadoNew, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, 150, 40));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -128,10 +128,10 @@ public class listadoFeriados extends javax.swing.JFrame {
         menuPrincipal volveramenu = new menuPrincipal(controlador);
     }//GEN-LAST:event_botonSalirActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnCargarFeriadoNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarFeriadoNewActionPerformed
         dispose();
-        cargarFeriado iracargar=new cargarFeriado(controlador);
-    }//GEN-LAST:event_jButton1ActionPerformed
+        cargarFeriado iracargar = new cargarFeriado(controlador);
+    }//GEN-LAST:event_btnCargarFeriadoNewActionPerformed
 
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
         if(!anoFeriado.getText().equals("")){
@@ -150,7 +150,7 @@ public class listadoFeriados extends javax.swing.JFrame {
     private javax.swing.JTextField anoFeriado;
     private javax.swing.JButton botonBuscar;
     private javax.swing.JButton botonSalir;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnCargarFeriadoNew;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
